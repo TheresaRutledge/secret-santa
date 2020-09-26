@@ -8,30 +8,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Secret Santa</title>
+    <title>Gift Exchange!</title>
 </head>
+<header style='background-color: red ;'>
+    <h1>Gift Exchange</h1>
+    <h2>Generate a list of gift givers and recipients!</h2>
+    <h3>Participants can be segmented into groups. Individuals in the same group will not be paired with eachother.</h3>
+</header>
 
-<body>
-
-    <form class="container mt-5" id='group-form'>
-        <div id='groups'>
-            <div class="form-inline">
-                <label class="" for="group-1">Group 1: </label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="group-1">
-                <button id='button-1' class="btn btn-primary mb-2 add-group">Add Group</button>
+<body style='background-color:green;'>
+    <div class='container mt-5'>
+        <form id='group-form'>
+            <div id='groups'>
+                <div class="form-inline">
+                    <label class="" for="group-1">Group 1: </label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="group-1">
+                    <button id='button-1' class="btn btn-primary mb-2 add-group">Add Group</button>
+                </div>
             </div>
-            <!-- <div class="form-inline">
-            <label class="" for="group-2">Group 1: </label>
-            <input type="text" class="form-control mb-2 mr-sm-2" id="group-2">
-            <button id='group-2' class="btn btn-primary mb-2">Add Group</button>
-        </div> -->
+            <div>
+                <button class='btn btn-danger mt-3' type='submit' id='generate'>Generate</button>
+            </div>
+        </form>
+        <div class='container mt-5' id='results'>
         </div>
-        <div>
-            <button class='btn btn-danger mt-3' type='submit' id='generate'>Generate</button>
-        </div>
-    </form>
-    <div class='container mt-5' id='results'>
-        <!-- <h4>Eric was assigned to Brad</h4> -->
     </div>
 
 

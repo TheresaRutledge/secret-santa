@@ -1,18 +1,23 @@
-
-
-// const {availableRecipients,assignRecipients} = require('./script.js');
+//array of members in gift exchange
 let memberArray = [];
 
-const addGroup = document.querySelector('#groups');
-const generate = document.querySelector('#group-form');
-const results = document.querySelector('#results');
+//div of groups
+const addGroupBtn = document.querySelector('#groups');
+//group form
+const generateBtn = document.querySelector('#group-form');
+//div to hold results
+const resultsDiv = document.querySelector('#results');
 
+
+//add additional group form box
 function addGroupHandler(event) {
     event.preventDefault();
     if (event.target.tagName === 'BUTTON') {
         let id = event.target.id.split('');
         groupNumber = (id[id.length - 1].trim());
         groupNumber = parseInt(groupNumber);
+
+        if(document.querySelector(`#group-${groupNumber}`).value){
         let removeButton = document.querySelector(`#button-${groupNumber}`);
         removeButton.remove();
         groupNumber++;
@@ -38,20 +43,29 @@ function addGroupHandler(event) {
         newDiv.appendChild(newInput);
         newDiv.appendChild(newButton);
 
-        addGroup.appendChild(newDiv);
+        addGroupBtn.appendChild(newDiv);
+        } else {
+            alert('Must add at least one name');
+            return;
+        }
     }
 }
 
 function formSubmitHandler(event) {
     event.preventDefault();
-    const groupItems = addGroup.children;
+    const groupItems = addGroupBtn.children;
     const groupArray = Array.from(groupItems);
     if (groupArray.length < 2) {
         alert('Must enter at least two groups');
         return;
     }
+    //if the last group box had a value then go through each group and add the members to the member array
+    if(!groupArray[groupArray.length-1].children[1].value){
+        alert('Must enter at least one name per group');
+        return;
+    }
 
-    //go through each group and add the members to the member array
+
     groupArray.forEach((group) => {
         let id = group.children[1].id;
         groupNumber = (id[id.length - 1].trim());
@@ -60,7 +74,7 @@ function formSubmitHandler(event) {
             names = names.split(',');
             for (i = 0; i < names.length; i++) {
                 memberArray.push({
-                    name: names[i],
+                    name: names[i].trim(),
                     group: groupNumber,
                     assigned: false
                 })
@@ -68,13 +82,15 @@ function formSubmitHandler(event) {
 
     })
 assignRecipients();
+displayResults();
 }
 
-
-
-
-
-
+const reset = () => {
+for (i=0; i<memberArray.length; i++){
+    memberArray[i].assigned = false;
+}
+    assignRecipients();
+}
 
 
 // function to get available recipients. Can't be in same group or already be assigned
@@ -98,6 +114,11 @@ const assignRecipients = () => {
         let giver = memberArray[j];
 
         let availableRecipientsArray = availableRecipients(giver);
+        if(!availableRecipientsArray){
+            reset();
+            return;
+
+        }
 
         let randomNumber = Math.floor(Math.random() * availableRecipientsArray.length);
 
@@ -107,30 +128,31 @@ const assignRecipients = () => {
 
 
     }
-    displayResults();
 }
 
 function displayResults() {
     for (i = 0; i < memberArray.length; i++) {
         let newResult = document.createElement('h4');
         newResult.innerText = `${memberArray[i].name} gives to ${memberArray[i].recipient}!`;
-        results.appendChild(newResult);
+        resultsDiv.appendChild(newResult);
     }
     let startOver = document.createElement('button');
     startOver.classList.add('btn', 'btn-primary');
     startOver.setAttribute('id', 'start-over');
     startOver.innerText = 'Start Over';
 
-    results.appendChild(startOver);
+    resultsDiv.appendChild(startOver);
 
-    generate.remove();
+    generateBtn.remove();
 
 }
 
 function startOverHandler(event) {
+    if(event.target.tagName === 'BUTTON'){
     location.reload();
+    }
 }
 
-addGroup.addEventListener('click', addGroupHandler);
-generate.addEventListener('submit', formSubmitHandler);
-results.addEventListener('click', startOverHandler);
+addGroupBtn.addEventListener('click', addGroupHandler);
+generateBtn.addEventListener('submit', formSubmitHandler);
+resultsDiv.addEventListener('click', startOverHandler);
