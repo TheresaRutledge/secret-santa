@@ -7,7 +7,8 @@ If all participants can be paired then each will be in thier own group.
 
 
 ## Screenshot
-![](screenshot.png)
+![](./assets/images/screenshot.png)
 
 
 ## Website
+https://theresarutledge.github.io/secret-santa/
