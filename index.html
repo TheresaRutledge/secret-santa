@@ -7,30 +7,34 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+<link rel="stylesheet" href='./style.css'>
     <title>Gift Exchange!</title>
 </head>
-<header style='background-color: red ;'>
+<header class=center>
     <h1>Gift Exchange</h1>
     <h2>Generate a list of gift givers and recipients!</h2>
-    <h3>Participants can be segmented into groups. Individuals in the same group will not be paired with eachother.</h3>
 </header>
 
-<body style='background-color:green;'>
-    <div class='container mt-5'>
+<body>
+    <div class='container mt-5 justify-content-center'>
+
         <form id='group-form'>
-            <div id='groups'>
-                <div class="form-inline">
+            <div id='groups'class='center'>
+                <div class="form-inline mt-2">
                     <label class="" for="group-1">Group 1: </label>
                     <input type="text" class="form-control mb-2 mr-sm-2" id="group-1">
-                    <button id='button-1' class="btn btn-primary mb-2 add-group">Add Group</button>
+                    <button id='button-1' class="btn btn-secondary mb-2 add-group">Add Group</button>
                 </div>
             </div>
-            <div>
-                <button class='btn btn-danger mt-3' type='submit' id='generate'>Generate</button>
+            <p class=center>Seperate names by a comma</p>
+            <div class='center'>
+                <button class='btn mt-3' type='submit' id='generate'>Generate</button>
+            </div>
+            <div class='mt-2'>
+                <p>* Participants can be segmented into groups. Individuals in the same group will not be paired with eachother.</p>
             </div>
         </form>
-        <div class='container mt-5' id='results'>
+        <div class='container center' id='results'>
         </div>
     </div>
 
